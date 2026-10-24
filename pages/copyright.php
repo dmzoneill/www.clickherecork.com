@@ -6,7 +6,7 @@
            
 			
 			<fieldset>
-<legend><strong> <?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['copyright']; ?> </strong></legend>
+<legend><strong> <?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['copyright']; ?> </strong></legend>
 <img src="/images/uc.gif">
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

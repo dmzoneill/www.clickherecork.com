@@ -11,9 +11,9 @@ print "<h6><div><a href=\"javascript:sweeptoggle('contract')\">Contract All</a> 
 <h5 onClick="expandcontent(this, 'sc1')" style="cursor:hand; cursor:pointer"><span class="showstate"></span>Add News [click to expand]</h5>
 <div id="sc1" class="switchcontent">
 <?php
- /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($addnews){
+ /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ if($addnews){
   	//id  name  message  
- 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("insert into clicknews values('','$title','$msg')","one");
+ 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ $sql = $stream->do_query("insert into clicknews values('','$title','$msg')","one");
 	print "News Added.<br><br>";
  
   }
@@ -35,14 +35,14 @@ print "<h6><div><a href=\"javascript:sweeptoggle('contract')\">Contract All</a> 
 
   <?php
   
-  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($updatenews){
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ if($updatenews){
   	//id  name  message  
- 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("update clicknews set name='$title', message='$msg' where id='$updatenews'","one");
+ 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ $sql = $stream->do_query("update clicknews set name='$title', message='$msg' where id='$updatenews'","one");
 	print "Report Updated.<br><br>";
  
   }
  
-  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
   
   for($r=0;$r<count($sql);$r++){
 
@@ -76,14 +76,14 @@ $msg
 <?php
   
  
- /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($delnews){
+ /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ if($delnews){
   	//id  name  message  
- 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("DELETE from clicknews where id=$delnews","one");
+ 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable, UndefinedClass */ $sql = $stream->do_query("DELETE from clicknews where id=$delnews","one");
 	print "News deleted.<br><br>";
  
   }
  
-  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
   
   for($r=0;$r<count($sql);$r++){
 

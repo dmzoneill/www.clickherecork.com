@@ -23,7 +23,7 @@ do so and send what you have done with explanations to webmaster@evobb.com
 
 
 
-/** @psalm-suppress InvalidGlobal */ global $stream, $declared_class_db;
+/** @psalm-suppress InvalidGlobal */ /** @psalm-suppress InvalidGlobal */ global $stream, $declared_class_db;
 
 if (!$stream && $declared_class_db!="yes"){
 
@@ -33,9 +33,9 @@ class db {
 
 
 
-    /** @psalm-suppress MissingReturnType */ function graberrordesc() {
+    /** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function graberrordesc() {
 
-      /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->error=mysql_error();
+      /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->error=mysql_error();
 
       return $this->error;
 
@@ -43,9 +43,9 @@ class db {
 
 
 
-    /** @psalm-suppress MissingReturnType */ function graberrornum() {
+    /** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function graberrornum() {
 
-      /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->errornum=mysql_errno();
+      /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->errornum=mysql_errno();
 
       return $this->errornum;
 
@@ -55,17 +55,17 @@ class db {
 
 
 
-    /** @psalm-suppress MissingReturnType */ function connect(){
+    /** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function connect(){
 
 
 
-    /** @psalm-suppress InvalidGlobal */ global $fcwhost, $fcwusername, $fcwpassword2, $fcwdb_name;
+    /** @psalm-suppress InvalidGlobal */ /** @psalm-suppress InvalidGlobal */ global $fcwhost, $fcwusername, $fcwpassword2, $fcwdb_name;
 
 
 
-           /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->db = @mysql_connect($fcwhost,$fcwusername,$fcwpassword2);
+           /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->db = @mysql_connect($fcwhost,$fcwusername,$fcwpassword2);
 
-           /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction */ @mysql_select_db($fcwdb_name, $this->db);
+           /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction */ /** @psalm-suppress UndefinedFunction */ @mysql_select_db($fcwdb_name, $this->db);
 
 
 
@@ -73,11 +73,11 @@ class db {
 
 
 
-    /** @psalm-suppress MissingReturnType, MissingParamType */ function do_query($query, $ret) {
+    /** @psalm-suppress MissingReturnType, MissingParamType */ /** @psalm-suppress MissingReturnType, MissingParamType */ function do_query($query, $ret) {
 
 
 
-      /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction, UndefinedThisPropertyFetch */ $this->result = @mysql_query($query, $this->db);
+      /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction, UndefinedThisPropertyFetch */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction, UndefinedThisPropertyFetch */ $this->result = @mysql_query($query, $this->db);
 
 
 
@@ -95,11 +95,11 @@ class db {
 
 
 
-                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment */ $this->return = array();
+                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment */ /** @psalm-suppress UndefinedThisPropertyAssignment */ $this->return = array();
 
-                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction */ while ($row = @mysql_fetch_row($this->result)){
+                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction */ /** @psalm-suppress UndefinedFunction */ while ($row = @mysql_fetch_row($this->result)){
 
-                /** @psalm-suppress UndefinedThisPropertyAssignment */ $this->return[] = $row;
+                /** @psalm-suppress UndefinedThisPropertyAssignment */ /** @psalm-suppress UndefinedThisPropertyAssignment */ $this->return[] = $row;
 
                 }
 
@@ -109,7 +109,7 @@ class db {
 
 
 
-                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->return = @mysql_result($this->result,0,0);
+                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->return = @mysql_result($this->result,0,0);
 
 
 
@@ -117,7 +117,7 @@ class db {
 
 
 
-                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->return = @mysql_fetch_row($this->result);
+                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ /** @psalm-suppress UndefinedThisPropertyAssignment, UndefinedFunction */ $this->return = @mysql_fetch_row($this->result);
 
 
 
@@ -125,7 +125,7 @@ class db {
 
 
 
-                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment */ $this->return = "bad";
+                /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedThisPropertyAssignment */ /** @psalm-suppress UndefinedThisPropertyAssignment */ $this->return = "bad";
 
 
 
@@ -144,8 +144,8 @@ class db {
     }
 
 
-    /** @psalm-suppress MissingReturnType */ function close(){
-           /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction, UndefinedThisPropertyFetch */ @mysql_close($this->db);
+    /** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function close(){
+           /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction, UndefinedThisPropertyFetch */ /** @psalm-suppress UndefinedFunction, UndefinedThisPropertyFetch */ @mysql_close($this->db);
     }
 
 

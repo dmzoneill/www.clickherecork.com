@@ -4,13 +4,13 @@
 
 include "nusoap.php";
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ $term_p = $term;
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ $term_p = $term;
 /** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $cssinclude = 1; 
 $key = googlekey();
-/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $end = $start + 10;
+/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable, UndefinedGlobalVariable */ $end = $start + 10;
 $results = 10;
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable, RiskyTruthyFalsyComparison */ if($start ? $start=$start : $start=0);	
-/** @psalm-suppress RiskyTruthyFalsyComparison, UnusedVariable */ /** @psalm-suppress UnusedVariable */ if($start ? $t=$start : $t=0);
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable, RiskyTruthyFalsyComparison */ /** @psalm-suppress UndefinedGlobalVariable, RiskyTruthyFalsyComparison */ if($start ? $start=$start : $start=0);	
+/** @psalm-suppress RiskyTruthyFalsyComparison, UnusedVariable */ /** @psalm-suppress RiskyTruthyFalsyComparison, UnusedVariable */ if($start ? $t=$start : $t=0);
 if($term_p ? $term_p=$term_p : $term_p="");
 $previous = $start - 10;
 
@@ -27,7 +27,7 @@ $params = array(
 	'ie' => '',
 	'oe' => '');
 	
-/* @phpstan-ignore-line */ /** @psalm-suppress TooManyArguments */ $soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
+/* @phpstan-ignore-line */ /** @psalm-suppress TooManyArguments */ /** @psalm-suppress TooManyArguments */ $soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
 $soapoptions = 'urn:GoogleSearch';
 $result = $soapclient->call("doGoogleSearch", $params);
 $num = "{$result['estimatedTotalResultsCount']}";
@@ -83,7 +83,7 @@ else {
 
 
 
-/** @psalm-suppress MissingReturnType */ function google_footer(){
+/** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function google_footer(){
 	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $google = 1;	
 	include("footer.php"); 
 }	
@@ -91,7 +91,7 @@ else {
 
 
 // google numbers
-/** @psalm-suppress MissingReturnType, MissingParamType */ function number($num){
+/** @psalm-suppress MissingReturnType, MissingParamType */ /** @psalm-suppress MissingReturnType, MissingParamType */ function number($num){
 	if(strlen("$num")<8){
 		while(strlen("$num")<8){
 			$num = "0$num";
@@ -102,7 +102,7 @@ else {
 
 
 // google spell check
-/** @psalm-suppress MissingReturnType */ function google_spell(){
+/** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function google_spell(){
     global $soapclient;
     global $soapoptions;
 	global $key;
@@ -123,7 +123,7 @@ else {
 
 
 // google key
-/** @psalm-suppress MissingReturnType */ function googlekey(){
+/** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function googlekey(){
 	$google_key = array("qiXT/blQFHINGoMLNyWbpd7lmPUAmCVg","VnAEDgNQFHKmr7x5N/IZOlqJVXVIMpN8","ndLXmIRQFHKzFbIgCpeK9bxgFI10KLQS","CPnVXBFQFHLHEyAREs8K65fll1twh7BN","gnLaV59QFHJjvXr1heP8agWh4xFa5INL","nGFNCXxQFHJiIheIdGeXp2VOsngw/WVs","di7Sd3lQFHKZmzi/btrkrz0bu6DFgXJP","Myh++PhQFHIb071+CBwiNDIjJYLPwItQ");
 	$key = rand(0,count($google_key)-1);
 	$key = $google_key[$key];
@@ -134,12 +134,12 @@ else {
 
 
 // show top 5 searches
-/** @psalm-suppress MissingReturnType */ function google_top5(){
+/** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function google_top5(){
 
 	global $stream;
 
 	$alot = $stream->do_query("select * from `google` order by hits DESC","array"); // codespell:ignore alot
-	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedVariable */ $result .= "Top five searches : <br>";
+	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedVariable */ /** @psalm-suppress UndefinedVariable */ $result .= "Top five searches : <br>";
 	
 	for($i=0;$i<count($alot);$i++){ // codespell:ignore alot
 		$tmp = $alot[$i]; // codespell:ignore alot
@@ -161,7 +161,7 @@ else {
 
 
 // top 5 ralated, updates as searches // codespell:ignore ralated
-/** @psalm-suppress MissingReturnType */ function google_exists(){
+/** @psalm-suppress MissingReturnType */ /** @psalm-suppress MissingReturnType */ function google_exists(){
 	
 	global $stream,$term_p;
 	$key = googlekey();
@@ -178,7 +178,7 @@ else {
 		$hits = number($hits);
 		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $existss = $stream->do_query("update `google` set hits='$hits' where id='$id'","one");
 	}
-	/** @psalm-suppress InvalidOperand */ if(!count($exists)>0){  	
+	/** @psalm-suppress InvalidOperand */ /** @psalm-suppress InvalidOperand */ if(!count($exists)>0){  	
 		$numg = number(1);
 		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $search_tracker = $stream->do_query("INSERT INTO `google` VALUES ('', '$key', '$term_p', NOW(),'$numg')","one");
 	}

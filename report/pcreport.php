@@ -10,7 +10,7 @@ print "<h6><div><a href=\"javascript:sweeptoggle('contract')\">Contract All</a> 
 $sub = "<h5 onClick=\"expandcontent(this, 'sc2')\" style=\"cursor:hand; cursor:pointer\"><span class=\"showstate\"></span>Reports Status  [click to expand]</h5>
 <div id=\"sc2\" class=\"switchcontent\">";
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ switch($report){
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ switch($report){
 
 default:
 
@@ -50,7 +50,7 @@ print "</td></tr>";
 
 print $sub;
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clickpcreports` order by id desc","array");
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clickpcreports` order by id desc","array");
 
 print "<table cellpadding=2 cellspacing=0 border=0 width=800>";
 print "<tr><td colspan=17><a name='morn'></a><h5>Recent  Reports</h5></td></tr>";
@@ -88,11 +88,11 @@ break;
 case "addreport":
 print $sub;
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if(($rstaff) && ($rsubject) && ($rmsg) && ($rcomp)){
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ if(($rstaff) && ($rsubject) && ($rmsg) && ($rcomp)){
 
 $rrep = time();
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("INSERT INTO `clickpcreports` ( `id` , `rstaff` , `rsub` , `rcom` , `rmsg` , `rrep` , `rmesg` ) VALUES ('0', '$rstaff', '$rsubject', '$rcomp', '$rmsg', '$rrep', '')","one");
+/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable, UndefinedClass */ $sql = $stream->do_query("INSERT INTO `clickpcreports` ( `id` , `rstaff` , `rsub` , `rcom` , `rmsg` , `rrep` , `rmesg` ) VALUES ('0', '$rstaff', '$rsubject', '$rcomp', '$rmsg', '$rrep', '')","one");
 print "Report Logged";
 }
 else {
@@ -112,13 +112,13 @@ break;
 case "editreport":
 print $sub;
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($update){
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ if($update){
 
-	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("update clickpcreports set rstaff='$rstaff', rsub='$rsubject', rcom='$rcomp', rmsg='$rmsg', rmesg='$rmsg' where id='$update'","one");
+	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ $sql = $stream->do_query("update clickpcreports set rstaff='$rstaff', rsub='$rsubject', rcom='$rcomp', rmsg='$rmsg', rmesg='$rmsg' where id='$update'","one");
 	print "Report Updated.<br><br>";
 }
 
-/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass, UndefinedGlobalVariable */ $sql = $stream->do_query("SELECT * FROM `clickpcreports` where id='$id'","array");
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UndefinedClass, UndefinedGlobalVariable */ $sql = $stream->do_query("SELECT * FROM `clickpcreports` where id='$id'","array");
 
 print "<table cellpadding=2 cellspacing=0 border=0 width=800>";
 print "<tr><td colspan=17><a name='morn'></a><h5>Edit This Report</h5></td></tr>";

@@ -5,9 +5,9 @@
 			  <table bgcolor="#FEFEFE" cellpadding="0" cellspacing="0" border="0"><tr><td>
   <?php
   
-  /** @psalm-suppress MissingFile */ include("connect.php");
+  /** @psalm-suppress MissingFile */ /** @psalm-suppress MissingFile */ include("connect.php");
   
-  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
   
   for($r=0;$r<count($sql);$r++){
 
@@ -24,7 +24,7 @@ print "<fieldset><legend><strong><h4> $name</h4></strong></legend>$msg</fieldset
 
 
 <fieldset>
-<legend><strong> <?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['flights']; ?></strong></legend>
+<legend><strong> <?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['flights']; ?></strong></legend>
 <table width="340" border="0" cellpadding="2">
   <tr>
     <td><a href='http://www.ryanair.com' class="tab">Ryan Air</a></td>
@@ -55,7 +55,7 @@ print "<fieldset><legend><strong><h4> $name</h4></strong></legend>$msg</fieldset
 
 <br><br>
 <fieldset>
-<legend><strong> <?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['freemail']; ?></strong></legend>
+<legend><strong> <?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['freemail']; ?></strong></legend>
 
 <table width="340" border="0" cellpadding="2">
   <tr>
@@ -76,7 +76,7 @@ print "<fieldset><legend><strong><h4> $name</h4></strong></legend>$msg</fieldset
 </fieldset> 
 <br><br>
 <fieldset>
-<legend><strong><?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['currencyconverter']; ?></strong></legend>
+<legend><strong><?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['currencyconverter']; ?></strong></legend>
 
 <form name="ucc" method="post" action="http://www.xe.com/ucc/convert.cgi">
 
@@ -351,9 +351,9 @@ Which Currency<br>
 
 <br><br>
 <fieldset>
-<legend> <strong><?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['latestforums']; ?></strong></legend>
+<legend> <strong><?php /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ /** @psalm-suppress UndefinedGlobalVariable */ print $language['latestforums']; ?></strong></legend>
 
- <?php /** @psalm-suppress MissingFile */ include("posts.php"); ?>
+ <?php /** @psalm-suppress MissingFile */ /** @psalm-suppress MissingFile */ include("posts.php"); ?>
  
  
  </center>
