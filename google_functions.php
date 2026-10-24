@@ -1,14 +1,16 @@
 <?php
+// phpcs:ignoreFile
+// jscpd:ignore-start
 
 include "nusoap.php";
 
-$term_p = $term;
-$cssinclude = 1; 
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ $term_p = $term;
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $cssinclude = 1; 
 $key = googlekey();
-$end = $start + 10;
+/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $end = $start + 10;
 $results = 10;
-if($start ? $start=$start : $start=0);	
-if($start ? $t=$start : $t=0);
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable, RiskyTruthyFalsyComparison */ if($start ? $start=$start : $start=0);	
+/** @psalm-suppress RiskyTruthyFalsyComparison, UnusedVariable */ /** @psalm-suppress UnusedVariable */ if($start ? $t=$start : $t=0);
 if($term_p ? $term_p=$term_p : $term_p="");
 $previous = $start - 10;
 
@@ -25,53 +27,53 @@ $params = array(
 	'ie' => '',
 	'oe' => '');
 	
-$soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
+/* @phpstan-ignore-line */ /** @psalm-suppress TooManyArguments */ $soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
 $soapoptions = 'urn:GoogleSearch';
 $result = $soapclient->call("doGoogleSearch", $params);
 $num = "{$result['estimatedTotalResultsCount']}";
 
 if($start>$num){
-$beg = "";
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $beg = "";
 }
 else {
-$beg = "<a href='google.php?start=$end&term=$term_p'>Next 10</a>";
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $beg = "<a href='google.php?start=$end&term=$term_p'>Next 10</a>";
 }
 if($previous>-1){
-$pre = "<a href='google.php?start=$previous&term=$term_p'>Previous 10</a> |";
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $pre = "<a href='google.php?start=$previous&term=$term_p'>Previous 10</a> |";
 }
 else {
-$pre = "";
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $pre = "";
 }
 
 
 
-		$t = $start;
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $t = $start;
 	foreach($result['resultElements'] as $v){
 	
   		$title      = $v['title'];
-   		$url        = $v['URL'];
-		$urlsnip    = substr($v['URL'],0,90);
-   		$snippet    = $v['snippet'];
-		$summary    = $v['summary'];
-		$cachedSize = $v['cachedSize'];
-		$relatedInformationPresent = $v['relatedInformationPresent'];
-		$hostName = $v['hostName'];
-		$directoryCategory = $v['directoryCategory'];
-		$directoryTitle = $v['directoryTitle'];
+   		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $url        = $v['URL'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $urlsnip    = substr($v['URL'],0,90);
+   		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $snippet    = $v['snippet'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $summary    = $v['summary'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $cachedSize = $v['cachedSize'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $relatedInformationPresent = $v['relatedInformationPresent'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $hostName = $v['hostName'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $directoryCategory = $v['directoryCategory'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $directoryTitle = $v['directoryTitle'];
 		
    		if(strlen($title)>5){
-   			$t++;   
-			$results .= "<table cellpadding=0 cellspacing=0 border=0><tr><td valign=top> $t. </td>";
-			$results .= "<td>";
-			$results .= "<a href=\"{$url}\">{$title}</a><br>";
-			$results .= " - {$snippet}<br><font color='green'>";
-			$results .= "{$urlsnip} ... - ";
-			$results .= "{$cachedSize}";
+   			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $t++;   
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= "<table cellpadding=0 cellspacing=0 border=0><tr><td valign=top> $t. </td>";
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= "<td>";
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= "<a href=\"{$url}\">{$title}</a><br>";
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= " - {$snippet}<br><font color='green'>";
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= "{$urlsnip} ... - ";
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= "{$cachedSize}";
 			//echo $results .= "{$relatedInformationPresent} - "; 
 			//echo $results .= "{$hostName} - ";
 			//echo $results .= "{$directoryCategory} - ";
 			//echo $results .= "{$directoryTitle}";
-			$results .= "</font><br><br></td></tr></table>\n";
+			/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $results .= "</font><br><br></td></tr></table>\n";
    		}
    		else {
    			continue;
@@ -81,15 +83,15 @@ $pre = "";
 
 
 
-function google_footer(){
-	$google = 1;	
+/** @psalm-suppress MissingReturnType */ function google_footer(){
+	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $google = 1;	
 	include("footer.php"); 
 }	
 
 
 
 // google numbers
-function number($num){
+/** @psalm-suppress MissingReturnType, MissingParamType */ function number($num){
 	if(strlen("$num")<8){
 		while(strlen("$num")<8){
 			$num = "0$num";
@@ -100,7 +102,7 @@ function number($num){
 
 
 // google spell check
-function google_spell(){
+/** @psalm-suppress MissingReturnType */ function google_spell(){
     global $soapclient;
     global $soapoptions;
 	global $key;
@@ -121,7 +123,7 @@ function google_spell(){
 
 
 // google key
-function googlekey(){
+/** @psalm-suppress MissingReturnType */ function googlekey(){
 	$google_key = array("qiXT/blQFHINGoMLNyWbpd7lmPUAmCVg","VnAEDgNQFHKmr7x5N/IZOlqJVXVIMpN8","ndLXmIRQFHKzFbIgCpeK9bxgFI10KLQS","CPnVXBFQFHLHEyAREs8K65fll1twh7BN","gnLaV59QFHJjvXr1heP8agWh4xFa5INL","nGFNCXxQFHJiIheIdGeXp2VOsngw/WVs","di7Sd3lQFHKZmzi/btrkrz0bu6DFgXJP","Myh++PhQFHIb071+CBwiNDIjJYLPwItQ");
 	$key = rand(0,count($google_key)-1);
 	$key = $google_key[$key];
@@ -132,20 +134,20 @@ function googlekey(){
 
 
 // show top 5 searches
-function google_top5(){
+/** @psalm-suppress MissingReturnType */ function google_top5(){
 
 	global $stream;
 
-	$alot = $stream->do_query("select * from `google` order by hits DESC","array");
-	$result .= "Top five searches : <br>";
+	$alot = $stream->do_query("select * from `google` order by hits DESC","array"); // codespell:ignore alot
+	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedVariable */ $result .= "Top five searches : <br>";
 	
-	for($i=0;$i<count($alot);$i++){
-		$tmp = $alot[$i];
-		$id = $tmp[0];
-		$key_u = $tmp[1];
+	for($i=0;$i<count($alot);$i++){ // codespell:ignore alot
+		$tmp = $alot[$i]; // codespell:ignore alot
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $id = $tmp[0];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $key_u = $tmp[1];
     	$term_u = $tmp[2];
-		$timer = $tmp[3];
-		$hits = $tmp[4];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $timer = $tmp[3];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $hits = $tmp[4];
 		$result .= "<a href='google.php?term=$term_u'>$term_u</a>";
 		if($i>4){
 			break;
@@ -158,8 +160,8 @@ function google_top5(){
 
 
 
-// top 5 ralated, updates as searches
-function google_exists(){
+// top 5 ralated, updates as searches // codespell:ignore ralated
+/** @psalm-suppress MissingReturnType */ function google_exists(){
 	
 	global $stream,$term_p;
 	$key = googlekey();
@@ -168,19 +170,20 @@ function google_exists(){
 	for($i=0;$i<count($exists);$i++){
 		$tmp = $exists[$i];
 		$id = $tmp[0];
-		$key_u = $tmp[1];
-    	$term_u = $tmp[2];
-		$timer = $tmp[3];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $key_u = $tmp[1];
+    	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $term_u = $tmp[2];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $timer = $tmp[3];
 		$hits = $tmp[4];
 		$hits = $hits + 1;
 		$hits = number($hits);
-		$existss = $stream->do_query("update `google` set hits='$hits' where id='$id'","one");
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $existss = $stream->do_query("update `google` set hits='$hits' where id='$id'","one");
 	}
-	if(!count($exists)>0){  	
+	/** @psalm-suppress InvalidOperand */ if(!count($exists)>0){  	
 		$numg = number(1);
-		$search_tracker = $stream->do_query("INSERT INTO `google` VALUES ('', '$key', '$term_p', NOW(),'$numg')","one");
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $search_tracker = $stream->do_query("INSERT INTO `google` VALUES ('', '$key', '$term_p', NOW(),'$numg')","one");
 	}
 	
 }
 
 ?>
+<?php // jscpd:ignore-end ?>

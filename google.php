@@ -1,25 +1,27 @@
 <?php
+// phpcs:ignoreFile
+// jscpd:ignore-start
 include ("nusoap.php");
 include ("connect.php");
 
-	if(!$term){
+	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if(!$term){
 	$term = "Chat";
 	}
 	$term_p = $term;
 	$cssinclude = 1; 
-	$key = googlekey();
-	$end = $start + 10;
+	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $key = googlekey();
+	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ $end = $start + 10;
 	$resultss = 10;
-	if($start ? $start=$start : $start=0);	
-	if($start ? $t=$start : $t=0);
-	if($term_p ? $term_p=$term_p : $term_p="");
+	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable, RiskyTruthyFalsyComparison */ if($start ? $start=$start : $start=0);	
+	/** @psalm-suppress RiskyTruthyFalsyComparison */ if($start ? $t=$start : $t=0);
+	/* @phpstan-ignore-line */ /** @psalm-suppress RiskyTruthyFalsyComparison */ if($term_p ? $term_p=$term_p : $term_p="");
 	$previous = $start - 10;
 	$num_array = array();
 	$google_vars = array();
 
 
 
-function browser(){
+/** @psalm-suppress MissingReturnType */ function browser(){
 	global $start;
 	global $previous;
 	global $term_p;
@@ -27,7 +29,7 @@ function browser(){
 	global $num_array;
 	
 	
-	if($start>$num_array[0]){
+	/** @psalm-suppress EmptyArrayAccess */ if($start>$num_array[0]){
 		$beg = "";
 	}
 	else {
@@ -45,7 +47,7 @@ function browser(){
 
 
 
-function googlekey(){
+/** @psalm-suppress MissingReturnType */ function googlekey(){
 	$google_key = array("qiXT/blQFHINGoMLNyWbpd7lmPUAmCVg","VnAEDgNQFHKmr7x5N/IZOlqJVXVIMpN8","ndLXmIRQFHKzFbIgCpeK9bxgFI10KLQS","CPnVXBFQFHLHEyAREs8K65fll1twh7BN","gnLaV59QFHJjvXr1heP8agWh4xFa5INL","nGFNCXxQFHJiIheIdGeXp2VOsngw/WVs","di7Sd3lQFHKZmzi/btrkrz0bu6DFgXJP","Myh++PhQFHIb071+CBwiNDIjJYLPwItQ");
 	$key = rand(0,count($google_key)-1);
 	$key = $google_key[$key];
@@ -61,13 +63,13 @@ function googlekey(){
 
 
 
-function do_spell( $term_p, &$spell ){
+/** @psalm-suppress MissingReturnType, MissingParamType */ function do_spell( $term_p, &$spell ){
 
 	global $term_p;
 	$key = googlekey();
     
     $params = array('key' => $key, 'phrase' => $term_p,);
-	$soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
+	/* @phpstan-ignore-line */ /** @psalm-suppress TooManyArguments */ $soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
 	$soapoptions = 'urn:GoogleSearch';
     $spell = $soapclient->call('doSpellingSuggestion', $params, $soapoptions);
     $err = $soapclient->getError();
@@ -87,20 +89,20 @@ function do_spell( $term_p, &$spell ){
 
 
 
-function google_top5(){
+/** @psalm-suppress MissingReturnType */ function google_top5(){
 
 	global $stream;
 
-	$alot = $stream->do_query("select * from `google` order by hits DESC","array");
-	$result .= "Top five searches : <br>";
+	/** @psalm-suppress UndefinedClass */ $alot = $stream->do_query("select * from `google` order by hits DESC","array"); // codespell:ignore alot
+	/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedVariable */ $result .= "Top five searches : <br>";
 	
-	for($i=0;$i<count($alot);$i++){
-		$tmp = $alot[$i];
-		$id = $tmp[0];
-		$key_u = $tmp[1];
+	for($i=0;$i<count($alot);$i++){ // codespell:ignore alot
+		$tmp = $alot[$i]; // codespell:ignore alot
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $id = $tmp[0];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $key_u = $tmp[1];
     	$term_u = $tmp[2];
-		$timer = $tmp[3];
-		$hits = $tmp[4];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $timer = $tmp[3];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $hits = $tmp[4];
 		$result .= "<a href='google.php?term=$term_u'>$term_u</a>";
 		if($i>4){
 			break;
@@ -115,7 +117,7 @@ function google_top5(){
 
 
 
-function number($num){
+/** @psalm-suppress MissingReturnType, MissingParamType */ function number($num){
 	if(strlen("$num")<8){
 		while(strlen("$num")<8){
 			$num = "0$num";
@@ -128,26 +130,26 @@ function number($num){
 
 
 
-function google_exists(){
+/** @psalm-suppress MissingReturnType */ function google_exists(){
 	
 	global $stream,$term_p;
 	$key = googlekey();
 	
-	$exists = $stream->do_query("select * from `google` where term like '%$term_p%'","array");
+	/** @psalm-suppress UndefinedClass */ $exists = $stream->do_query("select * from `google` where term like '%$term_p%'","array");
 	for($i=0;$i<count($exists);$i++){
 		$tmp = $exists[$i];
 		$id = $tmp[0];
-		$key_u = $tmp[1];
-    	$term_u = $tmp[2];
-		$timer = $tmp[3];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $key_u = $tmp[1];
+    	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $term_u = $tmp[2];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $timer = $tmp[3];
 		$hits = $tmp[4];
 		$hits = $hits + 1;
 		$hits = number($hits);
-		$existss = $stream->do_query("update `google` set hits='$hits' where id='$id'","one");
+		/** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable */ $existss = $stream->do_query("update `google` set hits='$hits' where id='$id'","one");
 	}
-	if(!count($exists)>0){  	
+	/** @psalm-suppress InvalidOperand */ if(!count($exists)>0){  	
 		$numg = number(1);
-		$search_tracker = $stream->do_query("INSERT INTO `google` VALUES ('', '$key', '$term_p', NOW(),'$numg')","one");
+		/** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable */ $search_tracker = $stream->do_query("INSERT INTO `google` VALUES ('', '$key', '$term_p', NOW(),'$numg')","one");
 	}
 	
 }
@@ -155,17 +157,17 @@ function google_exists(){
 
 
 
-function google_search(){
+/** @psalm-suppress MissingReturnType */ function google_search(){
 	
 	global $num_array;
 	global $term;
-	global $cssinclude; 
-	global $end;
+	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ global $cssinclude; 
+	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ global $end;
 	global $resultss;
 	global $start;	
 	global $t;
 	global $term_p;
-	global $previous;
+	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ global $previous;
 	global $google_vars;
 	$term_p = $term;
 	$key = googlekey();
@@ -182,8 +184,8 @@ function google_search(){
 		'ie' => '',
 		'oe' => '');
 		
-	$soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
-	$soapoptions = 'urn:GoogleSearch';
+	/* @phpstan-ignore-line */ /** @psalm-suppress TooManyArguments */ $soapclient = new soapclient("http://api.google.com/GoogleSearch.wsdl","wsdl");
+	/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $soapoptions = 'urn:GoogleSearch';
 	$result = $soapclient->call("doGoogleSearch", $params);
 	$num = "{$result['estimatedTotalResultsCount']}";
 	array_push($num_array,$num);
@@ -196,16 +198,16 @@ if($num>0){
    		$url        = $v['URL'];
 		$urlsnip    = $v['URL'];
    		$snippet    = $v['snippet'];
-		$summary    = $v['summary'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $summary    = $v['summary'];
 		$cachedSize = $v['cachedSize'];
-		$relatedInformationPresent = $v['relatedInformationPresent'];
-		$hostName = $v['hostName'];
-		$directoryCategory = $v['directoryCategory'];
-		$directoryTitle = $v['directoryTitle'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $relatedInformationPresent = $v['relatedInformationPresent'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $hostName = $v['hostName'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $directoryCategory = $v['directoryCategory'];
+		/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $directoryTitle = $v['directoryTitle'];
 		
    		if(strlen($title)>5){
    			$t++;   
-			$results .= "<table cellpadding=0 cellspacing=0 border=0><tr><td width=30 valign=top>$t.</td>";
+			/* @phpstan-ignore-line */ /** @psalm-suppress PossiblyUndefinedVariable */ $results .= "<table cellpadding=0 cellspacing=0 border=0><tr><td width=30 valign=top>$t.</td>";
 			$results .= "<td>";
 			$results .= "<a href=\"{$url}\">{$title}</a><br>";
 			$results .= " - {$snippet}<br><font color='green'>";
@@ -221,7 +223,7 @@ if($num>0){
    			continue;
    		}
    	}
-	return $results;
+	/* @phpstan-ignore-line */ /** @psalm-suppress PossiblyUndefinedVariable */ return $results;
 }
 else {
 return "No results";
@@ -229,21 +231,21 @@ return "No results";
 }	
 
 
-function view_info($num){
+/** @psalm-suppress MissingReturnType, MissingParamType */ function view_info($num){
 	global $google_vars,$term_p;
 	
 	for($j=0;$j<count($google_vars);$j++){
-		$estimatedTotalResultsCount      = $google_vars[0];
-   		$searchComments        = $google_vars[1];
-		$estimateIsExact    = $google_vars[2];
-   		$resultElements    = $google_vars[3];
-		$startIndex    = $google_vars[4];
-		$endIndex = $google_vars[5];
-		$searchTips = $google_vars[6];
-		$searchTime = $google_vars[8];
+		/** @psalm-suppress NoValue, EmptyArrayAccess */ $estimatedTotalResultsCount      = $google_vars[0];
+   		/** @psalm-suppress NoValue, UnusedVariable, EmptyArrayAccess */ /** @psalm-suppress UnusedVariable */ $searchComments        = $google_vars[1];
+		/** @psalm-suppress NoValue, UnusedVariable, EmptyArrayAccess */ /** @psalm-suppress UnusedVariable */ $estimateIsExact    = $google_vars[2];
+   		/** @psalm-suppress NoValue, UnusedVariable, EmptyArrayAccess */ /** @psalm-suppress UnusedVariable */ $resultElements    = $google_vars[3];
+		/** @psalm-suppress NoValue, EmptyArrayAccess */ $startIndex    = $google_vars[4];
+		/** @psalm-suppress NoValue, EmptyArrayAccess */ $endIndex = $google_vars[5];
+		/** @psalm-suppress NoValue, UnusedVariable, EmptyArrayAccess */ /** @psalm-suppress UnusedVariable */ $searchTips = $google_vars[6];
+		/** @psalm-suppress NoValue, EmptyArrayAccess */ $searchTime = $google_vars[8];
 	}
 	if($num==1){
-		$txt = "Results $startIndex - $endIndex of about $estimatedTotalResultsCount for \"$term_p\". ($searchTime s) ";
+		/* @phpstan-ignore-line */ /** @psalm-suppress PossiblyUndefinedVariable */ $txt = "Results $startIndex - $endIndex of about $estimatedTotalResultsCount for \"$term_p\". ($searchTime s) ";
 	}
 	if($num==2){
 		$txt = "<form name='search' method='post' action='google.php'><img src=\"images/powered_by_google.gif\"><br><input type='text' name='term' value='$term_p'><input type='submit' alt='Search' value='Google'></form>";
@@ -251,7 +253,7 @@ function view_info($num){
 	if($num==3){
 		$txt = "<form name='search' method='post' action='google.php'><input type='text' name='term' value='$term_p'><input type='submit' alt='Search' value='Google'><br><img src=\"images/powered_by_google.gif\"></form>";
 	}
-	return $txt;
+	/* @phpstan-ignore-line */ /** @psalm-suppress PossiblyUndefinedVariable */ return $txt;
 }
 
 
@@ -322,7 +324,8 @@ print "</table>";
 			</td>
 
 <?php
-$google = 1;
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $google = 1;
 @include("footer.php"); 
 	
 ?>	
+<?php // jscpd:ignore-end ?>

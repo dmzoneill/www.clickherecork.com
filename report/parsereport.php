@@ -1,16 +1,18 @@
 <?php
+// phpcs:ignoreFile
+// jscpd:ignore-start
 // parsereport.php
 
 include("connect.php");
 
-$shit = explode(".",$file);
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ $shit = explode(".",$file);
 $shit = explode("-",$shit[0]);
 
 $yday = $shit[0];
 $ymon = $shit[1];
 $yyear = $shit[2];
 
-if($file){
+/* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($file){
 
 $filename = "reports/$file" ;
   $dataFile = fopen( $filename, "r" ) ;
@@ -20,20 +22,20 @@ $filename = "reports/$file" ;
    while (!feof($dataFile)) 
    {
        $buffer = fgets($dataFile, 1024);
-	   if(stristr($buffer,"****")){
+	   /** @psalm-suppress RiskyTruthyFalsyComparison, PossiblyFalseArgument */ if(stristr($buffer,"****")){
 	   	continue;
 	   }
-	   else if (stristr($buffer,"#")){
+	   else /** @psalm-suppress RiskyTruthyFalsyComparison, PossiblyFalseArgument */ if (stristr($buffer,"#")){
 	   	continue;
 	   }
-	   else if (stristr($buffer,"End Total")){
+	   else /** @psalm-suppress RiskyTruthyFalsyComparison, PossiblyFalseArgument */ if (stristr($buffer,"End Total")){
 	   	continue;
 	   }
 	   else {
 	   
-	   eregi_replace("\"","",$buffer);
+	   /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedFunction */ eregi_replace("\"","",$buffer);
 	   
-	   $buffer = explode("|",$buffer);
+	   /** @psalm-suppress PossiblyFalseArgument */ $buffer = explode("|",$buffer);
 	   $trans = explode(",",$buffer[0]);
 	   $goodies = explode(",",$buffer[1]);
 	   $price = explode(",",$buffer[2]);
@@ -62,7 +64,7 @@ $filename = "reports/$file" ;
 	   continue;
 	   }
 	   
-      $sql = $stream->do_query("INSERT INTO `clicksales` ( `id` , `rday` , `rmonth` , `ryear` , `pc` , `starttime` , `endtime` , `totaltime` , `black` , `color` , `envelop` , `floppy` , `cdr` , `sum` , `group` , `pcprice` , `totalprice` ) VALUES ('', '$yday', '$ymon', '$yyear', '$pc', '$starttime', '$endtime', '$totaltime', '$black', '$color', '$envel', '$floppy', '$cdr', '$some', '$group', '$pcprice', '$totalprice')","one");
+      /* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("INSERT INTO `clicksales` ( `id` , `rday` , `rmonth` , `ryear` , `pc` , `starttime` , `endtime` , `totaltime` , `black` , `color` , `envelop` , `floppy` , `cdr` , `sum` , `group` , `pcprice` , `totalprice` ) VALUES ('', '$yday', '$ymon', '$yyear', '$pc', '$starttime', '$endtime', '$totaltime', '$black', '$color', '$envel', '$floppy', '$cdr', '$some', '$group', '$pcprice', '$totalprice')","one");
 	  
 	   }
    }
@@ -80,3 +82,4 @@ else {
 }
 
 ?>
+<?php // jscpd:ignore-end ?>

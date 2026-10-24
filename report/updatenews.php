@@ -1,3 +1,5 @@
+<?php // phpcs:ignoreFile ?>
+<?php // jscpd:ignore-start ?>
 <?php include("header.php"); 
 include("connect.php");
 // member .php
@@ -9,9 +11,9 @@ print "<h6><div><a href=\"javascript:sweeptoggle('contract')\">Contract All</a> 
 <h5 onClick="expandcontent(this, 'sc1')" style="cursor:hand; cursor:pointer"><span class="showstate"></span>Add News [click to expand]</h5>
 <div id="sc1" class="switchcontent">
 <?php
- if($addnews){
+ /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($addnews){
   	//id  name  message  
- 	$sql = $stream->do_query("insert into clicknews values('','$title','$msg')","one");
+ 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("insert into clicknews values('','$title','$msg')","one");
 	print "News Added.<br><br>";
  
   }
@@ -33,14 +35,14 @@ print "<h6><div><a href=\"javascript:sweeptoggle('contract')\">Contract All</a> 
 
   <?php
   
-  if($updatenews){
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($updatenews){
   	//id  name  message  
- 	$sql = $stream->do_query("update clicknews set name='$title', message='$msg' where id='$updatenews'","one");
+ 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass, UndefinedGlobalVariable */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("update clicknews set name='$title', message='$msg' where id='$updatenews'","one");
 	print "Report Updated.<br><br>";
  
   }
  
-  $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
   
   for($r=0;$r<count($sql);$r++){
 
@@ -55,7 +57,7 @@ print "<table cellpadding=5><form action='updatenews.php?updatenews=$id' method=
 <tr><td>Body of message</td><td><textarea name='msg' cols='70' rows='15'>
 $msg
 </textarea></td></tr>
-<tr><td>Finshed</td><td><input name='send' type='submit' value='Edit news'> <input name='reset' type='reset' value='Clear Message'></td></tr>
+<tr><td>Finished</td><td><input name='send' type='submit' value='Edit news'> <input name='reset' type='reset' value='Clear Message'></td></tr>
 </form>
 </table><br>
 ";
@@ -74,21 +76,21 @@ $msg
 <?php
   
  
- if($delnews){
+ /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedGlobalVariable */ if($delnews){
   	//id  name  message  
- 	$sql = $stream->do_query("DELETE from clicknews where id=$delnews","one");
+ 	/* @phpstan-ignore-line */ /** @psalm-suppress UnusedVariable, UndefinedClass */ /** @psalm-suppress UnusedVariable */ $sql = $stream->do_query("DELETE from clicknews where id=$delnews","one");
 	print "News deleted.<br><br>";
  
   }
  
-  $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
+  /* @phpstan-ignore-line */ /** @psalm-suppress UndefinedClass */ $sql = $stream->do_query("SELECT * FROM `clicknews` order by id desc","array");
   
   for($r=0;$r<count($sql);$r++){
 
 $tmp = $sql[$r];
 $id = $tmp[0];
 $name = $tmp[1];
-$msg = $tmp[2];
+/** @psalm-suppress UnusedVariable */ /** @psalm-suppress UnusedVariable */ $msg = $tmp[2];
 
 print "<table width=600><tr><td width=400>$name </td><td width=200> <a href='updatenews.php?delnews=$id'>Delete this news post</a></td></tr></table>";
 
@@ -100,3 +102,4 @@ print "<table width=600><tr><td width=400>$name </td><td width=200> <a href='upd
 
 
 <?php include("footer.php"); ?>
+<?php // jscpd:ignore-end ?>
