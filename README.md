@@ -1,5 +1,9 @@
 # clickherecork.com
 
+<p align="center">
+  <img src=".github/logo.png" alt="www.clickherecork.com logo" width="128" />
+</p>
+
 The site of ClickHere Cork, an internet café.
 
 ## Contents
